@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>依赖注入，provider service,directive</title>
+	<meta http-equiv="Content-type" content="text/html charset=utf-8">
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/angular.js/1.3.9/angular.min.js""></script>
+</head>
+<body ng-app="myApp" >
+   <div ng-controller="myController">
+           <p>{{num}}</p>
+           <p>{{nums}}</p>
+           <hello title="directive"></hello>
+   </div>
+    <script>
+        var mod=angular.module("myApp",[]);
+         mod.service("herService",function(){
+        	 var self=this;
+			 this.target="service";
+			 this.sayHello=function(){return "hello"+self.target}
+        })
+        //服务的正确书写方式，要传参。
+        mod.controller("myController",["$scope","herService",function($scope,herService){
+              $scope.nums="test";
+              $scope.num= herService.sayHello();
+        }])
+        mod.directive("hello",function(){
+        	return{
+        		restrict:"EA",//元素形式/属性名
+        		priority:1000,//优先级
+        		terminal:true,//true:低于该指令优先级的指令无效，false，低于该指令优先级的有效，优先级相同仍然会被执行。
+        		//template:"<div><h3>hello directive</h3></div>",
+        		//或者是一个函数
+        		//其中Element是指使用此指令的元素，而Attrs则是实例的属性，它是由一个元素上所有属性组成的集合，形如
+                    /*
+					{
+					  title: 'test',
+					  id: 'testDiv',
+					  class: 'demo',
+					  input: 'text',
+					  ...
+					}*/
+        		template:function(ele,attr){
+        			 return "<div>"+attr.title+"</div>";
+        		},
+        		replace:true,//布尔型，默认值为false，设置为true的时候，表示可以用模板内容替换自定义的元素标签。:::::把hello标签替换掉。
+				}
+					
+	    })
+
+					
+					
+    </script>
+
+</body>
+</html>
+<!-- 
+					       var myMod=angular.module("myApp",[]);
+					       mod.controller("myController",["$scope","herService",function($scope,herService){
+					             $scope.num= herService.target;
+					             $scope.nums="test";
+					        }])
+					        angular.module("app",[])
+					         .controller("ctrl",function($scope,$hexafy){}）
+					         .service('$hexafy', function() {
+					             this.$$gongneng = "将转入的数字，转为16进制";
+					             this.myFunc = function (x) {
+					                 return x.toString(16);
+					            }
+					         })
+					        mod.service("myService",function(){
+					        	  this.my=1;
+					        })
+					        var injector=angular.$inject(["mod",'myMod']);
+					        alert(injector.get("herService").her);
+					        alert(injector.get("myService").my); 
+
+							6. templateUrl：字符串或者函数，可选参数
+									可以使一个代表html文件路径的字符串，也可以是一个函数，大致意思与template一样。
+									在本地开发时，需要运行一个服务器，不然使用templateUrl会报错
+									Cross origin request script(cors)
+									由于加载html模板是通过异步加载，若加载大量的模板会拖慢网站的速度，这里有一个技巧，就是先缓存模板，你可以先在你的index页面加载好，将下列代码作为你页面的一部分包含在内
+									<script type="text/ng-template" id="demo.html">
+									  <div>这里是模板内容</div>
+									</script>
+								   这里的id属性就是被设置在templateUrl上用的
+									另外一种方法缓存如下
+									app.run(function($templateCache) {
+									  $templateCache.put('template.html', '<div>template</div>');
+									}) 
+
+
+-->

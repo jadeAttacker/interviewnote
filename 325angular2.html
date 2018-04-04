@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" ng-app="myAPP">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.3.9/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="cartController">
+        <ul>
+            <li ng-repeat="item in items">{{item.name}}</li>
+        </ul>
+    </div>
+    <script>
+var myAPP=angular.module('myAPP',[]);
+myAPP.factory('Items',function(){
+        var items={};
+        function query(){
+            return [
+            {"name":"土豆","price":"12"},
+            {"name":"猪肉","price":"12"},
+            {"name":"黄瓜","price":"12"},
+            {"name":"番茄","price":"12"}
+            ];
+        }
+        return { items:query()}
+});
+myAPP.controller('cartController',['$scope','Items',function($scope,Items){
+    console.log(Items.items);
+    $scope.items=Items.items;
+
+}]);
+    </script>
+</body>
+</html>

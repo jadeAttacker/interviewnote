@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>第一个angular练习</title>
+    <meta http-equiv="Content-type" content="text/html charset=utf-8">
+    <script type="text/javascript" src="./angular.js"></script> 
+   
+</head>
+<body ng-app="App" ng-controller="myCtro">
+    <h1 >{{name}}</h1>
+    <div ng-if="true">
+        <input type="text" ng-model="name"/>
+
+    </div>
+    <ul><li ng-repeat="member in group track by $index">{{member}}</li></ul>
+    <p>{{55.6|a}}</p>
+    <p ng-repeat="r in data | toArray">{{r}}</p>
+    <p>{{myService}}</p><!-- 要调用函数myService() -->
+    <ul><li ng-repeat="product in products|filter:'002' ">{{product}}</li></ul>
+    <span class="field-control">
+        <input type="text" ng-model="filter.productName" value=" "/>
+    </span>
+    <script>
+   
+      var mod=angular.module("App",[]);
+      /* mod.service("myFactory",function(){
+             var self=this;
+             this.target="service";
+             this.sayhello=function(){return "hello"+self.target}
+
+
+        })*/
+       
+       
+   
+
+       mod.controller("myCtro",["$scope","myFactory",function ($scope,myFactory) {
+           $scope.hello="hello world!";
+           $scope.name="this is h1 title";
+           $scope.group=["ming",'chen','ming','ning'];
+            $scope.data2 =["abc","mn",12.4,"绿水"];
+           $scope.data ="abc,mn,12,绿水";
+           $scope.myService=myFactory.sayhello();//相当于new myFactory()
+           $scope.products=[
+            {code:'P001',name:'Lumia 950XL',description:'win10系统最好的手机，带有黑科技色彩',category:'mobile'},
+            {code:'P002',name:'Lumia 950',description:'win10系统次好的手机，相比XL低个档次',category:'mobile'},
+            {code:'P003',name:'Surface Pro Book',description:'微软最具创新的笔记本',category:'Notebook'},
+            {code:'P004',name:'Surface Pro 4',description:'微软最好的PC/平板二合一产品',category:'Surface'},
+            {code:'P005', name: 'Surface 4', description: '微软次好的PC/平板二合一产品', category: 'Surface' },
+            {code:'P006',name:'Surface Phone',description:'传说中微软下一代win10系统超旗舰手机',category:'mobile'}
+            ];
+
+          /* $scope.parseInt=function(x){
+                  return parseInt(x)
+           }*/
+       }])
+       mod.factory("myFactory",function(){
+            var o={};
+            o.target="factory";
+            o.sayhello=function(){
+                return "hello my"+this.target;
+            }
+            return  o;
+      })
+       mod.filter("a",function(){
+              return function(item,separator){
+                    return parseInt(item);
+             }
+       })
+       mod.filter("toArray",function(){
+            return function(data,separator){
+                if(data){
+                    if(!separator) {
+                        separator = ",";//默认逗号分割
+                    }
+                    return data.split(separator);
+                }else{
+                    return [];//得到的结果类型始终为数组类型              }
+                }
+            }
+       });
+    
+      //再写一个provider类型的service
+    
+    
+
+
+    </script>
+</body>
+
+</html>
+
+
+
+
