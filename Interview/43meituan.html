@@ -43,7 +43,7 @@
 当你请求上面的一些属性的时候，浏览器为了给你最精确的值，需要flush队列，因为队列中可能会有影响到这些值的操作。即使你获取元素的布局和样式信息跟最近发生或改变的布局信息无关，浏览器都会强行刷新渲染队列。
 
 减少回流的方法：
- 直接改变classname/利用缓存(a) 使用DocumentFragment进行缓存操作,引发一次回流和重绘；
+ 直接改变classname/利用缓存(a) 使用DocumentFragment进行缓存,只引发一次回流和重绘；
 b) 使用display:none技术，只引发两次回流和重绘；
 c) 使用cloneNode(true or false) 和 replaceChild 技术，引发一次回流和重绘；)/减少引起flush队列更新的操作/元素脱离动画流
 
