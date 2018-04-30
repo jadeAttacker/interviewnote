@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>搜狗面试</title>
+    <meta charset="utf-8">
+    <style>
+          hr{
+          	background-color:blue;
+          	border:5px solid blue;
+          }
+          strong{
+            display:block;
+            margin:0 auto;
+            text-align:center;
+          }
+    </style>
+</head>
+<body>
+    <strong>剧中显示</strong>
+   1. bind和apply call的区别（改变this的指向）<br>
+   2. cookie和localstorge的区别（能否设置过期时间）;localstorg不能与服务器进行通信<br>
+   3. 跨域，页面间通信<br>
+   4. flex布局<br>
+   5. 三栏布局<br>
+   6. 清楚浮动=>浮动的影响，使父元素塌陷，破坏文档流 <br>
+   7. 箭头函数不能new<br>
+   8. position的取值（css3有更新）
+   9. scroll事件，瀑布流
+   <hr>
+   display：不响应，不占空间，回流，重绘<br>
+   visibility：后代无影响，占空间，不响应事件，不支持transition，只重绘，不回流<br>
+   opacity：占空间，响应事件，重绘，不回流。<br>
+   <hr>
+   let alwrite=document.write;<br>
+    alwrite("hello world");<br>
+    上面的代码会报错，因为alwrite方法是window或global调用的，不是document调用的。<br>
+    bind捆绑参数，捆绑对像，返回的是捆绑后的函数，可以进行调用。
+   <hr>
+   <table border="1"  style="border-collapse:collapse;border:1px solid red">
+     <tr><th>跨域方式</th><th>特点</th><th>局限</th></tr>
+     <tr>
+	     <td>JSONP跨域</td>
+	     <td>1、JSONP跨域不是一种前端技术，而是程序猿创造的一种跨域方法<br>
+               2、JSONP跨域，是一种简单的跨域方法，兼容性比较好
+               3. 不适用于对远程的操作，只能从远程读取东西。</td>
+	     <td></td>
+     </tr>
+     <tr>
+	     <td>iframe 跨域</td>
+	     <td>1、操作简便 2、兼容性好</td>
+	     <td>单纯的使用iframe跨域无法获取其他域名下的数据</td>
+     </tr>
+     <tr>
+	     <td>window.name 跨域</td>
+	     <td>1、必须与iframe配合使用 2、可以获取其他域名下的数据</td>
+	     <td></td>
+     </tr>
+     <tr>
+	     <td>document.domain 跨域</td>
+	     <td>1、必须保证两个要跨域的对象是有一个关联域名  </td>
+	     <td>1、只针对两个跨域对象是关联域名   2、如果一个域名被攻击，那么另外一个域名也有安全问题</td>
+     </tr>
+     <tr>
+	     <td>cookie跨域</td>
+	     <td>1、这种方法跨域的兼容性好，由于需要一些额外的设置，所以删除cookie的时候比较繁琐</td>
+	     <td>必须保证两个域名为关联域名</td>
+     </tr>
+     <tr>
+	     <td>postMessage跨域</td>
+	     <td>1、这种方法可以直接实现将数据从A站点传输到B站点，而且解除了cookie的限制和JSONP无法获取要传入的站点的信息</td>
+	     <td>这个为HTML5新增加的特性，浏览器的兼容性不是很好，低版本的浏览器不支持，具体可以见：CANIUSE网站</td>
+     </tr>
+
+   </table>
+    <hr>
+    <strong>简而言之：jsonp:可以从远程获取数据，但是不能操作（删除远程的localstorage等）</strong>
+    <strong>单独使用iframe可以操作远程，但是无法获取远程存储的东西</strong>
+    <strong>，window.name属性的神奇之处在于name 值在不同的页面（甚至不同域名）加载后依旧存在（如果没修改则值不会变化），并且可以支持非常长的 name 值（2MB）。</strong>
+    <hr>
+  <!--  <iframe src="http://php.com/index.html"></iframe>  -->
+
+  <script type="text/javascript"> 
+	iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    var state = 0;
+    
+    iframe.onload = function() {
+      if(state === 1) {
+          var data = JSON.parse(iframe.contentWindow.name);
+          console.log(data);
+          iframe.contentWindow.document.write('');
+          iframe.contentWindow.close();
+          document.body.removeChild(iframe);
+      } else if(state === 0) {
+          state = 1;
+          iframe.contentWindow.location = 'http://note.com/proxy.html';
+      }
+    };
+
+    iframe.src = 'http://php.com/index.html';
+    document.body.appendChild(iframe);
+  </script>  
+
+<script>
+     let alwrite=document.write;
+     var test=alwrite.bind(document);
+     test("trsa")
+	 function Bloomer() {
+	  this.petalCount = Math.ceil(Math.random() * 12) + 1;
+	}
+
+	// 1秒后调用declare函数
+	Bloomer.prototype.bloom = function() {
+	 
+	  window.setTimeout(this.declare.bind(this), 1000);
+	  //setTimeout调用的函数，其this指向window
+	};
+
+	Bloomer.prototype.declare = function() {
+	  console.log('我有 ' + this.petalCount + ' 朵花瓣!');
+	};
+	var Bl=new Bloomer();
+	Bl.bloom();
+</script>
+
+</body>
+</html>

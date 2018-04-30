@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>京东准备与总i及总结</title>
+	<meta charset="utf-8">
+	<style>
+       #jdpre{
+       	  width:50px;
+       	  height:50px;
+          /*background-color:blue;*/
+       	  border-radius:10px;
+       	  box-shadow:10px10px5px#888888;
+       	  border-image:url(jlu.jpg)3030 round;/* //设置所有边框图像的速记属性。 */
+       }
+/* 		@keyframes #jdpre{
+		0%{background: red;}
+		25%{background: yellow;}
+		50%{background: blue;}
+		100%{background: green;}
+		}
+} */
+      .trangle{
+      	width:0;
+      	height:0;
+        border-top:100px solid transparent;
+        border-left:100px solid yellow;
+        border-bottom:100px solid transparent;
+        border-right:100px solid transparent;
+        float:left;
+       
+
+      }
+	     .trangle2 { 
+			width: 5px; 
+			height: 5px; 
+			border-top: 100px solid red; 
+			border-left: 100px solid yellow; 
+			float:left;
+		
+	      } 
+	      .box{
+	      	position: relative;
+	      	width:80px;
+	      	height:50px;
+	      	border:20px solid black;
+	      	padding:30px;
+	      }
+	      .box1{
+	      	position: absolute;
+	      	top:0px;
+	      	left:0px;
+	      	border:20px solid green;
+	      }
+	      .trans{
+	      	
+	          width:80px;
+	         height:50px; 
+	      	  background-color:orange;
+	      	  clear:both;
+	      
+	      	 /* transform: perspective(600px) translate3d(50px,100px,0)  rotateZ(90deg); */
+	
+             transform: rotateZ(90deg) translate3d(-500px,-1000px,0)  ;
+
+    
+
+	      }
+	</style>
+</head>
+<body>
+        <div id="jdpre"></div>
+	    <!-- 画三角 -->
+	    <div class="trangle"> </div>
+	    <div class="trangle2"></div>
+     <!--  绝对定位和相对定位为的研究 -->
+     <!-- 从boder的左上方开始考虑。忽略padding的值。-->
+    <div class="box">
+        <div class="box1">
+           你好！
+       </div>
+    </div>
+         <!--  transform研究 -->
+    <div class="trans">
+       
+       transform旋转测试
+
+
+    </div>
+
+
+
+
+
+
+<div>
+
+		   css文件：<br>
+			    1. import导入：<!-- <style>@import url(style.css)</style> <-->有兼容问题，网页加载完才加载<br>
+			    2. link链接方式：<!-- <link rel="stylesheet" type="text/css" href="style.css"> -->页面加载的时候同时加载<br>
+			    3. 嵌入方式：最常用，写在页面上方。
+			    4. 内联方式：写在标签内部。<div style="background-color:red;font-size:10px"></div>分号隔开，注意！！<br>
+		   css优化的几种方式：<br>
+		        1.避免很炫但是体验不好的效果。<br>
+		        2.提高css加载性能。<br>
+		            (1)严格让样式和结构分离。即在head中引入css,不写在内联样式中。<br>
+		            (2)尽量利用html缓存。<br>
+		            (3)对css压缩减小体积。一句话写完的不用两句话。<br>
+		        3.合理使用选择器<br>
+		           （1）不使用通配符<br>
+		           （2）利用继承<br>
+		            (3) 浮动定位的使用要谨慎，要尽量放在前面。<br>
+		  <p>css3新特性：
+		       1.选择器：伪类和伪元素。::书写方式改变。<br>
+		          p:first-child;   p:first-letter   p:last-child
+		       2. css倒角。
+		          border-radius：25px;  box-shadow: 
+		       3. 对背景的控制
+		          background-size：背景尺寸的大小。
+		       4. 渐变
+		          线性渐变与径向渐变
+		          background: linear-gradient(direction, color-stop1, color-stop2,...);
+		          background: radial-gradient(center, shape size, start-color,...,last-color);
+		       5. transform transtion   </p>
+		  用到的h5的特性：
+		     <header>header</header>
+		     <section>section</section>
+		     <footer>footer</footer>
+		     <nav>导航</nav>
+		     <article>文章</article>
+		     draggable="true"//元素可拖动<br>
+		     section/aside/calendar/time/email/figure/figurecaption/<fieldset>把表单中的相关控件集中起来<br>
+		 h5语义化开发：<br>
+		    利于SEO<br>
+		    利用文档结构<br>
+		    容易让结构和样式分离<br>
+
+		如何监听一个对象：<br>
+		    1. proxy事件代理。<br>
+		    2. object.defineProperty函数
+
+
+
+		快速排序：递归，交换位置<br>
+		二分查找：已经排序，找出相应数得位置<br>
+		冒泡排序：两次循环
+		for(int i =0;i < score.length - 1;i++)  {  
+		            for(int j = (score.length - 2);j >= i;j--)  
+		            {  
+		                if(score[j] < score[j+1])  
+		                {  
+		                    int temp = score[j];  
+		                    score[j] = score[j+1];  
+		                    score[j+1] = temp;  
+		                }  
+		            }  
+		}<br> 
+		选择排序：跟冒泡排序差不多，每次找一个值。 
+		</fieldset>
+
+</div>
+
+
+
+</body>
+<script>
+      let obj = {name:"dww"};
+      let nameVal = obj.name;
+      
+      Object.defineProperty(obj, 'name', {
+          configurable : true,//是否是可配置的----是否可以更改enumerable,writable等
+          enumerable : true,//是否可被for in枚举
+          get : function() {
+              return nameVal.toUpperCase();
+              console.log()
+
+          },
+          set : function(newVal) {
+             nameVal = newVal;
+         }
+      });
+      obj.name="cxn";
+
+
+
+
+
+
+
+
+
+  /* let user={};
+   let proxy=new Proxy(user,{
+       get(target,property){
+          console.info(`get prop:${property}`);
+          return `[${target[property]}]`;
+
+       },
+       set(target,property,value){
+       	  console.info(`set prop: ${property}`);
+          target[property]=btoa(value);
+ 
+       }
+   })
+   proxy.name="admin";
+   proxy.name="admin";*/
+     
+
+</script>
+</html>

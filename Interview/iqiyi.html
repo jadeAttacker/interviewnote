@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>爱奇艺面试总结</title>
+	<meta charset="utf-8">
+</head>
+<body id="test">
+ 跨域资源共享：需要附加请求页面的源信息：Origin：URL
+ 服务端回发相同的源信息：Access-Control-Allow-Origin：URL
+
+
+
+
+
+<p>//鼠标滑动问题</p>
+<ul id="color-list">
+    <li id="addEvent">red</li>
+    <li id="on_click">yellow</li>
+</ul>
+
+    
+
+
+
+<script>
+window.onload=function(){
+	function handleResponse(response){
+		alert(response.ip+"..."+response.city+"..."+response.region_name+"...")
+	}
+	var script=document.createElement("script");
+	
+	script.src="http://freegeoip.net/json/?callback=handleResponse";
+	document.body.insertBefore(script,document.body.firstChild);
+  /* var lastX = null,
+	lastY = null;
+   window.onmousemove = function(event){*/
+
+	/*var curX = event.clientX,
+		curY = event.clientY,
+		direction = '';
+	// console.info(event);
+	// console.info(event.clientX);
+	// console.info(event.clientY);
+	// 初始化坐标
+	if(lastX == null || lastY == null){
+		lastX = curX;
+		lastY = curY;
+		return ;
+	}
+	if(curX > lastX){
+		direction += 'X右,';
+	}else if(curX < lastX){
+		direction += 'X左,';
+	}else{
+		direction += 'X居中,';
+	}
+	if(curY > lastY){
+		direction += 'Y上';
+	}else if(curY < lastY){
+		direction += 'Y下';
+	}else{
+		direction += 'Y居中';
+	}
+	lastX = curX;
+	lastY = curY;
+	console.info(direction);
+	document.body.innerText = direction;
+ }*/
+
+
+   
+  var startX,startY,endX,endY;
+    window.addEventListener('mousedown', function(e) {
+
+        
+        e.preventDefault();
+        startX = e.pageX;
+        startY = e.pageY;
+        console.log( startX);
+        console.log( startY);
+    });
+
+     window.addEventListener('mouseup', function(e) {
+
+        
+        e.preventDefault();
+        EndX = e.pageX;
+        EndY = e.pageY;
+        console.log( EndX);
+        console.log( EndY);
+    });
+
+}
+
+   
+
+
+
+
+</script>
+
+</body>
+</html>

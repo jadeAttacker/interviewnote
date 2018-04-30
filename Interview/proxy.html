@@ -1,0 +1,10 @@
+<body>
+  <script type="text/javascript"> 
+    iframe = document.createElement('iframe'),
+    iframe.src = 'http://php.com/index.html';
+    document.body.appendChild(iframe);
+    iframe.onload = function() {
+      iframe.src = 'http:/note.com/proxy.html';
+    };
+  </script>
+</body>
